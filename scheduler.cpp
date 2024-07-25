@@ -3,7 +3,7 @@
 
 #include "scheduler.hpp"
 
-#include "course.hpp"
+//#include "course.hpp"
 
 Scheduler::Scheduler(std::vector<Course> const &classes) {
     available_classlist = classes;
@@ -17,6 +17,7 @@ int Scheduler::maxClasses(int start_time, int end_time) {
 
     //
     
+    return 0;
 }
 
 void trim_classlist(std::vector<Course> &classlist, int start, int end) {
