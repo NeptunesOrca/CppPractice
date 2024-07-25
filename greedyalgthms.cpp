@@ -12,4 +12,6 @@
     - scheduler class should be initialized with a classlist
     - scheduler class should have a function to calculate the max classes that can be taken
 */
-
+int main() {
+    Scheduler test;
+}
