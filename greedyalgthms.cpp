@@ -1,6 +1,8 @@
 #include <iostream>
+#include <vector>
 
 #include "scheduler.hpp"
+#include "course.hpp"
 
 /*
     == QUESTION 1: CHAOS UNIVERSITY ==
@@ -13,5 +15,6 @@
     - scheduler class should have a function to calculate the max classes that can be taken
 */
 int main() {
-    Scheduler test;
+    std::vector<Course> classList1 = {};
+    Scheduler test();
 }
