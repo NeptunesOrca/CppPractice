@@ -27,5 +27,5 @@ class Scheduler {
     public:
     Scheduler(std::vector<Course> const &classes);
 
-    int maxClasses(int start_time, int end_time);
+    int maxClasses(int start_time, int end_time, int time_between=10);
 };

@@ -16,9 +16,7 @@ Scheduler::Scheduler(std::vector<Course> const &classes) {
     rng = std::mt19937(time(NULL));
 }
 
-int Scheduler::maxClasses(int start_time, int end_time) {
-    //heuristic: course with earliest finish time
-
+int Scheduler::maxClasses(int start_time, int end_time, int time_between) {
     //trim classlist
     std::vector<Course> classlist = available_classlist; //makes a copy of the available classes to alter for the test
     trim_classlist(classlist, start_time, end_time);
@@ -26,9 +24,24 @@ int Scheduler::maxClasses(int start_time, int end_time) {
     //sort by end time
     Scheduler::quicksort(classlist);
 
+    //greedy algorithm:
+    //heuristic: course with earliest finish time
+
     //
-    
-    return 0;
+    int max_classes=0;
+    int current_end;
+
+    while (classlist.size() > 0) {
+        //Pop first element from the classlist, which is sorted by ascending finish time
+        current_end = classlist[0].end; //collects necessary information
+        classlist.erase(classlist.begin()); //removes from list
+        max_classes++;  //increases by one max class
+
+        //Trim classlist as needed
+        trim_classlist(classlist, current_end + time_between, end_time);
+    }
+
+    return max_classes;
 }
 
 void Scheduler::trim_classlist(std::vector<Course> &classlist, int start, int end) {
