@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <random>
 #include <stdlib.h>
 #include <time.h>
 
@@ -11,7 +13,7 @@ bool compare_course_ends(Course c1, Course c2) { return c1.end < c2.end; }
 
 Scheduler::Scheduler(std::vector<Course> const &classes) {
     available_classlist = classes;
-    random_engine_is_seeded = false;
+    rng = std::mt19937(std::random_device());
 }
 
 int Scheduler::maxClasses(int start_time, int end_time) {
@@ -23,7 +25,8 @@ int Scheduler::maxClasses(int start_time, int end_time) {
     print_classlist(classlist);
 
     //sort by end time
-    Scheduler::shuffle(classlist);
+    std::shuffle(classlist.begin(), classlist.end(), rng);
+    //Scheduler::shuffle(classlist);
     print_classlist(classlist);
 
     //
@@ -60,7 +63,6 @@ void Scheduler::print_course(Course c1) {
 void Scheduler::quicksort(std::vector<Course> &classlist) {
     //Random Quicksort
     Scheduler::shuffle(classlist);
-
     
 }
 
@@ -70,38 +72,17 @@ void Scheduler::shuffle(std::vector<Course> &classlist) {
         return;
     }
 
-
-    int max_index = classlist.size() - 1;
-    std::cout << max_index;
-    int rand_index;
-
-    for (int i = 0; i < max_index; i++) {
-        rand_index = Scheduler::get_random_num(max_index, i);
-        /*std::cout << "    - Swapping indices " << i << " and " << rand_index << " : ";
-        Scheduler::print_course(classlist[i]);
-        std::cout << " and ";
-        Scheduler::print_course(classlist[rand_index]);
-        std::cout << "\n";*/
-        Scheduler::swap_courses(classlist[i], classlist[rand_index]);
-    }
+    //Using the std lib shuffle, because mine doesn't work and I know how to make the std lib one work now
+    std::shuffle(classlist.begin(), classlist.end(), rng);
 }
 
 int Scheduler::get_random_num(int max, int min = 0) {
-    if (!random_engine_is_seeded) {
-        srand(time(NULL));
-        random_engine_is_seeded = true;
-    }
-    
-    int random_num = (rand() % (max+1)) + min;
+    /*
+    Note on std::mt19937 :
+    To get a random number, we use the .operator() function on the object.
+    However, this is called not by doing *mt_name*.operator(), but instead by calling *mt_name*()
+    It's whack, but that's C++ for you. It's also kina cool
+    */
+    int random_num = (rng() % (max+1)) + min;
     return random_num;
-}
-
-void Scheduler::swap_courses(Course c1, Course c2) {
-    int temp_start = c1.start;
-    int temp_end = c1.end;
-
-    c1.start = c2.start;
-    c1.end = c2.end;
-    c2.start = temp_start;
-    c2.end = temp_end;
 }
