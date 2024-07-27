@@ -22,11 +22,9 @@ int Scheduler::maxClasses(int start_time, int end_time) {
     //trim classlist
     std::vector<Course> classlist = available_classlist; //makes a copy of the available classes to alter for the test
     trim_classlist(classlist, start_time, end_time);
-    print_classlist(classlist);
 
     //sort by end time
     Scheduler::quicksort(classlist);
-    print_classlist(classlist);
 
     //
     
