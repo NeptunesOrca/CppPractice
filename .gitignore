@@ -6,3 +6,8 @@ greedyalgthms.ilk
 greedyalgthms.pdb
 scheduler.obj
 vc140.pdb
+scheduler.exe
+scheduler.ilk
+scheduler.pdb
+__pycache__/scheduler.cpython-312.pyc
+course.obj
