@@ -60,21 +60,31 @@ void Scheduler::print_course(Course c1) {
 }
 
 void Scheduler::quicksort(std::vector<Course> &classlist) {
+    //skip trivial cases
+    if (classlist.size() <= 1) {
+        return;
+    }
+
     //Random Quicksort
     shuffle(classlist);
+    print_classlist(classlist);
 
     //Quicksort recursion
     qsort_recurse(classlist, 0, (classlist.size()-1));
 }
 
 void Scheduler::qsort_recurse(std::vector<Course> &classlist, int p, int r) {
-    if (p == r) {
+    if (p >= r) {
         // array of size 1, no further sorting needed
         return;
     }
     
     // q the index of the pivot in it's final position
     int q = qsort_partition(classlist, p, r);
+    std::cin;
+    std::cout << "    Pivot: ";
+    print_course(classlist[q]);
+    std::cout << "\n";
     print_classlist(classlist);
 
     qsort_recurse(classlist, p, q-1);
