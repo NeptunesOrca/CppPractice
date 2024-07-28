@@ -15,6 +15,9 @@ class Scheduler {
     std::vector<Course> available_classlist;
     std::mt19937 rng;
 
+    /*These could (and possibly should) be redone as constant functions, e.g.
+    void Scheduler::print_classlist(std::vector<Course &classlist) const;
+    */
     void Scheduler::print_classlist(std::vector<Course> &classlist);
     void Scheduler::trim_classlist(std::vector<Course> &classlist, int start, int end);
     void Scheduler::quicksort(std::vector<Course> &classlist);

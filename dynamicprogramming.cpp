@@ -11,3 +11,19 @@
 */
 
 #include <iostream>
+
+#include "coingame.hpp"
+
+int main() {
+    std::vector coins = {4, 4, 9, 4, 1, 2, 3};
+    CoinGame game(coins);
+
+    //define tests
+    CGTest tests[] = {CGTest(0,3,13,5,false), CGTest(0,4,12,2,false), CGTest(2,2,9,9,true), CGTest(4,6,4,2,true)};
+
+    //run tests
+    for (CGTest test : tests) {
+        test.run_test_on(game);
+    }
+
+}
