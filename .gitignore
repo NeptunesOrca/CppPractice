@@ -11,3 +11,5 @@ scheduler.ilk
 scheduler.pdb
 __pycache__/scheduler.cpython-312.pyc
 course.obj
+a3test.py
+coin_game.py
