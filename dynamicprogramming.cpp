@@ -9,3 +9,5 @@
         - margin: margin by which current player will win if both players win optimally
         - take_right: boolean of which coin the current player should take to obtain maximum
 */
+
+#include <iostream>
