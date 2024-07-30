@@ -23,12 +23,20 @@ class CGTest {
     int start;
     int end;
     CGResult expected;
+    std::vector<int> maxresult;
+    std::vector<int> opresult;
 
     public:
     CGTest(int startpt, int endpt, int exp_max, int exp_margin, bool exp_takeR) {
         start = startpt;
         end = endpt;
         expected = CGResult(exp_max, exp_margin, exp_takeR);
+
+        //set all results to negative at start to easily check
+        for (int i = start; i <= end; i++) {
+            maxresult[i] = -1;
+            opresult[i] = -1;
+        }
     };
 
     void run_test_on(CoinGame &game) {
@@ -36,6 +44,11 @@ class CGTest {
         bool margin_pass = false;
         bool takeR_pass = false;
         
+        //check test is valid
+        if (game.size() > end) {
+            std::cout << "Invalid game. End selection was " << end << " but the selected game only has a maximum of " << game.size() << " coins!";
+        }
+
         //perform test
         CGResult actual = game.run(start, end);
 
@@ -75,4 +88,5 @@ class CoinGame {
     
     CGResult run(int start, int end);
     std::string CoinGame::out();
+    int size();
 };

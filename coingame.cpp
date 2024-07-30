@@ -4,6 +4,7 @@
 
 CoinGame::CoinGame(std::vector<int> input_coins) {
     coins = input_coins;
+
 }
 
 CGResult CoinGame::run(int start, int end) {
@@ -16,4 +17,8 @@ CGResult CoinGame::run(int start, int end) {
 
 std::string CoinGame::out() {
     
+}
+
+int CoinGame::size() {
+    return coins.size();
 }
