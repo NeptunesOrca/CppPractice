@@ -23,8 +23,7 @@ class CGTest {
     int start;
     int end;
     CGResult expected;
-    std::vector<int> maxresult;
-    std::vector<int> opresult;
+    std::vector<std::vector<int>> results;
 
     public:
     CGTest(int startpt, int endpt, int exp_max, int exp_margin, bool exp_takeR) {
@@ -33,9 +32,10 @@ class CGTest {
         expected = CGResult(exp_max, exp_margin, exp_takeR);
 
         //set all results to negative at start to easily check
-        for (int i = start; i <= end; i++) {
-            maxresult[i] = -1;
-            opresult[i] = -1;
+        for (int i = 0; i <= end; i++) {
+            for (int j = 0; j <= end; j++) {
+                results[i][j] = -1;
+            }
         }
     };
 
