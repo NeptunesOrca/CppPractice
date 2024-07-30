@@ -6,11 +6,13 @@ class CGResult {
     int max;
     int margin;
     bool takeRight;
+    bool isSet;
 
-    CGResult(int start_max = 0, int start_margin = 0, bool start_takeR = true) {
+    CGResult(int start_max = 0, int start_margin = 0, bool start_takeR = true, bool set = true) {
         max = start_max;
         margin = start_margin;
         takeRight = start_takeR;
+        isSet = set;
     }
     
     std::string out() {
@@ -23,9 +25,10 @@ class CGTest {
     int start;
     int end;
     CGResult expected;
-    std::vector<std::vector<int>> results;
 
     public:
+    std::vector<std::vector<CGResult>> partial_results;
+
     CGTest(int startpt, int endpt, int exp_max, int exp_margin, bool exp_takeR) {
         start = startpt;
         end = endpt;
@@ -34,7 +37,7 @@ class CGTest {
         //set all results to negative at start to easily check
         for (int i = 0; i <= end; i++) {
             for (int j = 0; j <= end; j++) {
-                results[i][j] = -1;
+                partial_results[i][j] = CGResult(-1,-1, true, false);
             }
         }
     };
@@ -50,7 +53,7 @@ class CGTest {
         }
 
         //perform test
-        CGResult actual = game.run(start, end);
+        CGResult actual = game.run(start, end, partial_results);
 
         if (actual.max == expected.max) {
             max_pass = true;
@@ -86,7 +89,7 @@ class CoinGame {
     public:
     CoinGame(std::vector<int> input_coins);
     
-    CGResult run(int start, int end);
+    CGResult run(int start, int end, std::vector<std::vector<CGResult>> &partial_results);
     std::string CoinGame::out();
     int size();
 };
